@@ -6,7 +6,7 @@ const socket = io('/', {transports: ['websocket']});
 
 const Chat = () => {
     const [mensagens, setMensagens] = useState([]);
-    const [usuario, setUsuario] = useState('Italo');
+    const [usuario, setUsuario] = useState('');
     const [mensagem, setMensagem] = useState('');
 
     useEffect(() => {
@@ -26,15 +26,17 @@ const Chat = () => {
             event.preventDefault();
         }
 
-        const mensagemObject = {
-            usuario: usuario,
-            mensagem: mensagem
-        };
-        mensagens.push(mensagemObject);
-        setMensagens(mensagens);
-        setMensagem('');
+        if (usuario !== '' && mensagem !== '') {
+            const mensagemObject = {
+                usuario: usuario,
+                mensagem: mensagem
+            };
+            mensagens.push(mensagemObject);
+            setMensagens(mensagens);
+            setMensagem('');
 
-        socket.emit('sendMessage', mensagemObject);
+            socket.emit('sendMessage', mensagemObject);
+        }
     };
 
     return (
