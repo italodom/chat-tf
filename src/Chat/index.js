@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {Container, Wrapper} from "./style";
 import {io} from 'socket.io-client'
 
-const socket = io('https://chat-tf.vercel.app/', {transports: ['websocket']});
+const socket = io('/', {transports: ['websocket']});
 
 const Chat = () => {
     const [mensagens, setMensagens] = useState([]);
